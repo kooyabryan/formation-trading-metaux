@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@layer theme {
+  :root {
+    --color-background: oklch(0.17 0.01 258);
+    --color-foreground: oklch(0.95 0.01 43);
+    --color-card: oklch(0.19 0.01 258);
+    --color-card-foreground: oklch(0.95 0.01 43);
+    --color-popover: oklch(0.17 0.01 258);
+    --color-popover-foreground: oklch(0.95 0.01 43);
+    --color-primary: oklch(0.62 0.18 68);
+    --color-primary-foreground: oklch(0.19 0.01 258);
+    --color-secondary: oklch(0.24 0.01 258);
+    --color-secondary-foreground: oklch(0.95 0.01 43);
+    --color-muted: oklch(0.28 0.01 258);
+    --color-muted-foreground: oklch(0.68 0.01 43);
+    --color-accent: oklch(0.62 0.18 68);
+    --color-accent-foreground: oklch(0.19 0.01 258);
+    --color-destructive: oklch(0.61 0.23 25);
+    --color-destructive-foreground: oklch(0.95 0.01 43);
+    --color-border: oklch(0.31 0.01 258);
+    --color-input: oklch(0.31 0.01 258);
+    --color-ring: oklch(0.62 0.18 68);
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .brass-gradient {
+    background: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #b8860b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .card-premium {
+    background: linear-gradient(to bottom right, var(--color-card), var(--color-card), var(--color-muted));
+    border-color: oklch(from var(--color-border) l c h / 0.5);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-link {
+    color: var(--color-muted-foreground);
+    transition: color 200ms;
+  }
+
+  .nav-link:hover {
+    color: var(--color-foreground);
+  }
+
+  .btn-brass {
+    background: linear-gradient(to right, #d4af37, #ffd700);
+    color: #1a1a1a;
+    font-weight: 500;
+    box-shadow: 0 10px 15px -3px oklch(from var(--color-primary) l c h / 0.2);
+    transition: all 300ms;
+  }
+
+  .btn-brass:hover {
+    background: linear-gradient(to right, #ffd700, #d4af37);
+  }
+}
