@@ -323,7 +323,8 @@ async function seed() {
   console.log("Generating PDF workbooks...");
   for (const course of insertedCourses) {
     const courseLessons = lessonsData.filter(l => l.courseSlug === course.slug);
-    const pdfPath = generatePDF(course, courseLessons);
+    const courseData = coursesData.find(c => c.slug === course.slug)!;
+    const pdfPath = generatePDF(courseData, courseLessons);
     console.log(`✓ Generated PDF: ${pdfPath}`);
   }
 
