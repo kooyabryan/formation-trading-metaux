@@ -984,6 +984,17 @@ function generatePDF(course: typeof coursesData[0], courseLessons: typeof lesson
 async function seed() {
   console.log("🌱 Seeding database with comprehensive course content...");
 
+  if (process.env.PDFS_ONLY === "1") {
+    console.log("Generating PDF workbooks without database access...");
+    for (const course of coursesData) {
+      const courseLessons = lessonsData.filter(l => l.courseSlug === course.slug);
+      const pdfPath = generatePDF(course, courseLessons);
+      console.log(`✓ Generated PDF: ${pdfPath}`);
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return;
+  }
+
   // Clear existing data
   console.log("Clearing existing data...");
   await db.delete(quizzes);
@@ -1036,6 +1047,11 @@ async function seed() {
   for (const course of insertedCourses) {
     const courseLessons = lessonsData.filter(l => l.courseSlug === course.slug);
     const courseData = coursesData.find(c => c.slug === course.slug)!;
+    const filepath = path.join(coursesDir, `${course.slug}-cahier-etude.pdf`);
+    if (fs.existsSync(filepath)) {
+      console.log(`✓ PDF already exists: /cours/${path.basename(filepath)}`);
+      continue;
+    }
     const pdfPath = generatePDF(courseData, courseLessons);
     console.log(`✓ Generated PDF: ${pdfPath}`);
   }
