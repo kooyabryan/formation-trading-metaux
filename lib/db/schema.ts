@@ -25,7 +25,11 @@ export const lessons = pgTable("lessons", {
   slug: text("slug").notNull(),
   title: text("title").notNull(),
   description: text("description"),
+  body: text("body"),
+  objectives: text("objectives"),
+  keyTakeaways: text("key_takeaways"),
   videoUrl: text("video_url"),
+  videoScript: text("video_script"),
   pdfUrl: text("pdf_url"),
   order: integer("order").default(0),
   duration: integer("duration"),
@@ -51,4 +55,12 @@ export const userProgress = pgTable("user_progress", {
   completedAt: timestamp("completed_at"),
   notes: text("notes"),
   lastWatchedAt: timestamp("last_watched_at").defaultNow(),
+});
+
+export const quizzes = pgTable("quizzes", {
+  id: serial("id").primaryKey(),
+  courseId: integer("course_id").notNull().references(() => courses.id, { onDelete: "cascade" }),
+  title: text("title").notNull(),
+  questions: text("questions").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });

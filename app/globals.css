@@ -2,26 +2,45 @@
 
 @layer theme {
   :root {
-    --color-background: oklch(0.17 0.01 258);
-    --color-foreground: oklch(0.95 0.01 43);
-    --color-card: oklch(0.19 0.01 258);
-    --color-card-foreground: oklch(0.95 0.01 43);
-    --color-popover: oklch(0.17 0.01 258);
-    --color-popover-foreground: oklch(0.95 0.01 43);
-    --color-primary: oklch(0.62 0.18 68);
-    --color-primary-foreground: oklch(0.19 0.01 258);
+    /* Backgrounds - Deep dark progression */
+    --color-background: oklch(0.11 0.01 258);
+    --color-background-secondary: oklch(0.13 0.01 258);
+    --color-background-tertiary: oklch(0.17 0.01 258);
+    --color-card: oklch(0.14 0.01 258);
+    --color-card-hover: oklch(0.16 0.01 258);
+    
+    /* Borders & Muted */
+    --color-border: oklch(0.23 0.01 258);
+    --color-border-muted: oklch(0.25 0.01 258);
+    --color-muted: oklch(0.30 0.01 258);
+    
+    /* Text hierarchy */
+    --color-foreground: oklch(0.96 0.01 258);
+    --color-foreground-secondary: oklch(0.84 0.01 258);
+    --color-muted-foreground: oklch(0.56 0.01 258);
+    
+    /* Brass accents - Muted sophisticated tones */
+    --color-primary: oklch(0.62 0.08 68);
+    --color-primary-light: oklch(0.70 0.09 68);
+    --color-primary-lighter: oklch(0.78 0.10 68);
+    --color-primary-foreground: oklch(0.11 0.01 258);
+    
+    /* Supporting colors */
     --color-secondary: oklch(0.24 0.01 258);
-    --color-secondary-foreground: oklch(0.95 0.01 43);
-    --color-muted: oklch(0.28 0.01 258);
-    --color-muted-foreground: oklch(0.68 0.01 43);
-    --color-accent: oklch(0.62 0.18 68);
-    --color-accent-foreground: oklch(0.19 0.01 258);
+    --color-secondary-foreground: oklch(0.96 0.01 258);
+    --color-accent: oklch(0.62 0.08 68);
+    --color-accent-foreground: oklch(0.11 0.01 258);
     --color-destructive: oklch(0.61 0.23 25);
-    --color-destructive-foreground: oklch(0.95 0.01 43);
-    --color-border: oklch(0.31 0.01 258);
-    --color-input: oklch(0.31 0.01 258);
-    --color-ring: oklch(0.62 0.18 68);
-    --radius: 0.5rem;
+    --color-destructive-foreground: oklch(0.96 0.01 258);
+    --color-success: oklch(0.65 0.17 165);
+    
+    /* UI Elements */
+    --color-input: oklch(0.23 0.01 258);
+    --color-ring: oklch(0.62 0.08 68);
+    --color-popover: oklch(0.14 0.01 258);
+    --color-popover-foreground: oklch(0.96 0.01 258);
+    
+    --radius: 0.625rem;
   }
 }
 
@@ -34,15 +53,19 @@
     background: var(--color-background);
     color: var(--color-foreground);
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
   h1 {
-    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
   }
 
   h2 {
@@ -59,37 +82,115 @@
     text-wrap: balance;
   }
 
+  /* Refined brass gradient with muted tones */
   .brass-gradient {
-    background: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #b8860b 100%);
+    background: linear-gradient(135deg, #b8925c 0%, #d1aa73 50%, #e5c391 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
   }
 
+  .brass-text {
+    color: #d1aa73;
+  }
+
+  /* Premium card with subtle depth */
   .card-premium {
-    background: linear-gradient(to bottom right, var(--color-card), var(--color-card), var(--color-muted));
-    border-color: oklch(from var(--color-border) l c h / 0.5);
-    backdrop-filter: blur(8px);
+    background: linear-gradient(135deg, 
+      oklch(0.14 0.01 258) 0%, 
+      oklch(0.15 0.01 258) 50%, 
+      oklch(0.16 0.01 258) 100%
+    );
+    border: 1px solid oklch(0.23 0.01 258);
+    box-shadow: 0 4px 24px -4px oklch(0.08 0.01 258);
+    backdrop-filter: blur(12px);
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  .card-premium:hover {
+    border-color: oklch(0.25 0.01 258);
+    box-shadow: 0 8px 32px -4px oklch(0.10 0.01 258);
+    transform: translateY(-2px);
+  }
+
+  /* Navigation link with smooth transition */
   .nav-link {
     color: var(--color-muted-foreground);
-    transition: color 200ms;
+    transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
   }
 
   .nav-link:hover {
     color: var(--color-foreground);
   }
 
+  /* Refined brass button */
   .btn-brass {
-    background: linear-gradient(to right, #d4af37, #ffd700);
-    color: #1a1a1a;
-    font-weight: 500;
-    box-shadow: 0 10px 15px -3px oklch(from var(--color-primary) l c h / 0.2);
-    transition: all 300ms;
+    background: linear-gradient(135deg, #b8925c 0%, #d1aa73 100%);
+    color: #0a0b0e;
+    font-weight: 600;
+    box-shadow: 0 4px 16px -2px rgba(184, 146, 92, 0.3);
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(209, 170, 115, 0.2);
   }
 
   .btn-brass:hover {
-    background: linear-gradient(to right, #ffd700, #d4af37);
+    background: linear-gradient(135deg, #d1aa73 0%, #e5c391 100%);
+    box-shadow: 0 6px 24px -2px rgba(184, 146, 92, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-brass:active {
+    transform: translateY(0);
+  }
+
+  /* Background variations */
+  .bg-secondary {
+    background: var(--color-background-secondary);
+  }
+
+  .bg-tertiary {
+    background: var(--color-background-tertiary);
+  }
+
+  /* Section with subtle gradient */
+  .section-gradient {
+    background: linear-gradient(to bottom, 
+      transparent 0%, 
+      oklch(0.13 0.01 258) 50%, 
+      transparent 100%
+    );
+  }
+
+  /* Refined borders */
+  .border-refined {
+    border-color: var(--color-border);
+  }
+
+  .border-refined-muted {
+    border-color: var(--color-border-muted);
+  }
+
+  /* Text hierarchy utilities */
+  .text-primary-brand {
+    color: #d1aa73;
+  }
+
+  .text-secondary {
+    color: var(--color-foreground-secondary);
+  }
+
+  .text-muted {
+    color: var(--color-muted-foreground);
+  }
+
+  /* Success accent (use sparingly) */
+  .text-success {
+    color: var(--color-success);
+  }
+
+  .bg-success {
+    background-color: var(--color-success);
   }
 }

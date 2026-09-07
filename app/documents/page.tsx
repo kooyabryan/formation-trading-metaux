@@ -52,8 +52,8 @@ export default async function DocumentsPage() {
 
         <Card className="card-premium mb-8">
           <CardHeader>
-            <CardTitle>Déposer un document</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-[#f3f4f6]">Téléverser un document</CardTitle>
+            <CardDescription className="text-[#d1d5db]">
               Formats acceptés : PDF, DOCX, XLSX, PNG, JPG (max 10 Mo)
             </CardDescription>
           </CardHeader>

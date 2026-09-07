@@ -34,12 +34,12 @@ export function Navigation() {
   }
 
   return (
-    <nav className="border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+    <nav className="border-b border-[#27282f] bg-[#0a0b0e]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0a0b0e]/80 sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded bg-gradient-to-br from-primary to-primary/70" />
+              <div className="h-8 w-8 rounded bg-gradient-to-br from-[#b8925c] to-[#d1aa73]" />
               <span className="text-xl font-semibold font-[var(--font-playfair)] brass-gradient">
                 MetalTrade Academy
               </span>
@@ -51,7 +51,7 @@ export function Navigation() {
                   key={link.href}
                   href={link.href}
                   className={`nav-link ${
-                    pathname === link.href ? "text-foreground font-medium" : ""
+                    pathname === link.href ? "text-[#f3f4f6] font-medium" : "text-[#8a8b94]"
                   }`}
                 >
                   {link.label}

@@ -2,6 +2,11 @@
 
 Plateforme professionnelle de formation au trading des métaux pour clients B2B français. Application Next.js moderne avec authentification, gestion de cours vidéo et espace documentaire.
 
+**Repository Origin:** `kooya222/tmp-baa8768e0ec949e4`  
+**Origin URL:** `https://origin.cursor.com/git/kooya222/tmp-baa8768e0ec949e4`
+
+> **Note:** To rename this repository to something more descriptive (e.g., `metal-trading-academy` or `formation-trading-metaux`), visit the Origin dashboard and use the repository settings.
+
 ## 🎯 Fonctionnalités
 
 - ✅ Landing page premium avec design industriel luxe (charcoal/brass)
@@ -129,6 +134,182 @@ npm run seed
 Ajoutez les URLs de vos supports PDF dans le champ `pdf_url` de la table `lessons`.
 
 ## 🚀 Déploiement sur Vercel
+
+### Méthode recommandée : Origin ↔ Vercel
+
+Cette application est hébergée sur Origin et peut être déployée directement sur Vercel.
+
+#### Option 1: Connexion Origin → Vercel (Recommandé)
+
+1. **Connecter Origin à Vercel**
+   - Allez sur [vercel.com](https://vercel.com)
+   - Cliquez sur "Add New Project"
+   - Sélectionnez "Import from Git Provider"
+   - Choisissez "Origin" comme provider (si disponible)
+   - Ou importez via l'URL : `https://origin.cursor.com/git/kooya222/tmp-baa8768e0ec949e4`
+
+2. **Configuration du projet**
+   - Framework Preset: **Next.js** (détecté automatiquement)
+   - Root Directory: `./` (racine)
+   - Build Command: `npm run build` (par défaut)
+   - Output Directory: `.next` (par défaut)
+
+3. **Variables d'environnement (CRITICAL)**
+
+   Ajoutez ces variables dans les settings Vercel avant le premier déploiement :
+
+   ```env
+   # Database - OBLIGATOIRE
+   DATABASE_URL=postgresql://user:password@host.neon.tech/database?sslmode=require
+   
+   # Better Auth - OBLIGATOIRE
+   BETTER_AUTH_SECRET=your_production_secret_32_chars_minimum
+   BETTER_AUTH_URL=https://your-app.vercel.app
+   NEXT_PUBLIC_BETTER_AUTH_URL=https://your-app.vercel.app
+   
+   # Vercel Blob - OPTIONNEL (pour l'upload de documents)
+   BLOB_READ_WRITE_TOKEN=vercel_blob_...
+   ```
+
+   **Important:** 
+   - ⚠️ `BETTER_AUTH_SECRET` doit être différent du secret local
+   - ⚠️ `BETTER_AUTH_URL` doit correspondre à votre domaine Vercel exact
+   - ⚠️ Changez l'URL après attribution du domaine Vercel
+
+#### Option 2: Via Vercel CLI
+
+```bash
+# Installer le CLI Vercel
+npm i -g vercel
+
+# Se connecter
+vercel login
+
+# Premier déploiement (mode interactif)
+vercel
+
+# Suivre les prompts:
+# - Link to existing project? No
+# - Project name: metal-trading-academy
+# - Directory: ./
+# - Override settings? No
+```
+
+Ensuite, configurez les variables d'environnement :
+
+```bash
+# Ajouter DATABASE_URL
+vercel env add DATABASE_URL production
+
+# Ajouter BETTER_AUTH_SECRET
+vercel env add BETTER_AUTH_SECRET production
+
+# Ajouter les URLs (après avoir obtenu le domaine Vercel)
+vercel env add BETTER_AUTH_URL production
+vercel env add NEXT_PUBLIC_BETTER_AUTH_URL production
+```
+
+### 4. Préparer la base de données Neon pour la production
+
+**Après le premier déploiement Vercel**, seed la base de données :
+
+#### Option A: Depuis votre machine locale
+
+```bash
+# Créer un fichier .env.production avec l'URL Neon de production
+DATABASE_URL="postgresql://..." npm run seed
+```
+
+#### Option B: Via Vercel CLI
+
+```bash
+# Pull les env vars de production
+vercel env pull .env.production
+
+# Seed avec l'env de production
+npm run seed
+```
+
+#### Option C: Depuis le dashboard Vercel
+
+1. Allez dans votre projet Vercel
+2. Settings → Functions → Command Execution (si disponible)
+3. Ou utilisez un déploiement temporaire avec le seed dans le build
+
+### 5. Vérifications post-déploiement
+
+✅ **Checklist critique:**
+
+- [ ] L'app se charge sur `https://your-app.vercel.app`
+- [ ] La landing page affiche les 3 cours
+- [ ] La création de compte fonctionne (`/inscription`)
+- [ ] La connexion fonctionne (`/connexion`)
+- [ ] Les leçons sont accessibles après login
+- [ ] L'upload de documents fonctionne (si Blob configuré)
+- [ ] Aucune erreur dans les Vercel Logs
+
+### 6. Configuration du domaine personnalisé
+
+Dans Vercel Dashboard → Settings → Domains :
+
+1. Ajouter votre domaine (ex: `academy.votreentreprise.fr`)
+2. Suivre les instructions DNS
+3. **Mise à jour CRITIQUE** : Après configuration du domaine, mettez à jour les variables d'environnement :
+
+```env
+BETTER_AUTH_URL=https://academy.votreentreprise.fr
+NEXT_PUBLIC_BETTER_AUTH_URL=https://academy.votreentreprise.fr
+```
+
+4. Redéployez pour appliquer les changements
+
+### Troubleshooting Vercel
+
+**Erreur: "Cannot connect to database"**
+- Vérifiez que `DATABASE_URL` est bien configurée dans Vercel
+- Assurez-vous que l'URL contient `?sslmode=require`
+- Vérifiez que votre projet Neon autorise les connexions depuis Vercel
+
+**Erreur: "Better Auth configuration error"**
+- Vérifiez que `BETTER_AUTH_URL` correspond exactement à votre domaine
+- Assurez-vous que `BETTER_AUTH_SECRET` est défini (32+ caractères)
+- Les deux variables doivent être présentes : `BETTER_AUTH_URL` + `NEXT_PUBLIC_BETTER_AUTH_URL`
+
+**Erreur: "Build failed"**
+- Consultez les logs de build dans Vercel Dashboard
+- Vérifiez que toutes les dépendances sont dans `package.json`
+- Assurez-vous que Node.js version est compatible (18+)
+
+**Problème: "Auth ne fonctionne pas après déploiement"**
+- Vérifiez que les URLs dans Better Auth correspondent au domaine de production
+- Testez en navigation privée (pour éviter les cookies locaux)
+- Consultez les Function Logs dans Vercel pour les erreurs API
+
+### Configuration Neon pour production
+
+1. **Dans Neon Dashboard**
+   - Créez une branche dédiée "production" (optionnel mais recommandé)
+   - Notez la connection string de production
+   - Activez "Pooling" si vous attendez beaucoup de trafic
+
+2. **Sécurité Neon**
+   - Utilisez des credentials différents pour dev/prod
+   - Activez les "Protected Branches" si disponible
+   - Configurez les backups automatiques
+
+### Intégration Vercel Marketplace
+
+Pour une intégration plus poussée :
+
+1. **Neon Postgres** (via Marketplace)
+   - Vercel Dashboard → Storage → Create Database
+   - Choisir "Neon Postgres"
+   - Les variables d'environnement seront auto-configurées
+
+2. **Vercel Blob** (pour uploads)
+   - Vercel Dashboard → Storage → Create Blob Store
+   - Copiez le `BLOB_READ_WRITE_TOKEN`
+   - Ajoutez-le dans les variables d'environnement
 
 ### 1. Push vers GitHub
 
