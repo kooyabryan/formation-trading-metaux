@@ -418,9 +418,9 @@ Les banques centrales détiennent collectivement plus de trente-cinq mille tonne
 L'argent possède une personnalité différente. Historiquement monnaie, il est devenu métal industriel. Plus de cinquante pour cent de la demande vient de l'industrie. L'électronique utilise l'argent pour sa conductivité. Le photovoltaïque nécessite de l'argent pour les cellules solaires.
 
 Le ratio or-argent est surveillé par tous les traders. Historiquement autour de quinze, il fluctue aujourd'hui entre soixante et quatre-vingts. En mars deux mille vingt, il a atteint cent vingt-cinq créant une opportunité spectaculaire. Comprendre ces fondamentaux vous permet de replacer les mouvements quotidiens dans un contexte structurel.`,
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+    videoUrl: "https://d2ol7oe51mr4n9.cloudfront.net/user_3EemOYigx3OYuM7mzTKY7b9X1vB/f77cfbaf-2a4a-4a2f-823f-f94f4aec3e3b.mp4",
     order: 1,
-    duration: 720,
+    duration: 180,
   },
   {
     courseSlug: "trading-metaux-precieux",
