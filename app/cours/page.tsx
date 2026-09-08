@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -54,7 +55,19 @@ export default async function CoursePage() {
             href={`/cours/${course.slug}`}
             className="block group"
           >
-            <Card className="card-premium group-hover:brass-glow h-full transition-all duration-300 group-active:scale-[0.98] flex flex-col">
+            <Card className="card-premium group-hover:brass-glow h-full transition-all duration-300 group-active:scale-[0.98] flex flex-col overflow-hidden">
+              {course.imageUrl && (
+                <div className="relative h-48 w-full overflow-hidden">
+                  <Image 
+                    src={course.imageUrl} 
+                    alt={course.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0b0e]/90 via-[#0a0b0e]/40 to-transparent" />
+                </div>
+              )}
               <CardHeader className="flex-1 space-y-4 pb-4">
                 <div className="flex items-start justify-between gap-3">
                   <Badge 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -54,8 +55,17 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 sm:py-16 flex items-center justify-center min-h-[calc(100vh-8rem)]">
-      <Card className="card-premium brass-glow w-full max-w-md">
+    <div className="relative container mx-auto px-4 py-8 sm:py-16 flex items-center justify-center min-h-[calc(100vh-8rem)]">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <Image 
+          src="/images/training-room.png" 
+          alt=""
+          fill
+          className="object-cover opacity-5"
+          sizes="100vw"
+        />
+      </div>
+      <Card className="card-premium brass-glow w-full max-w-md relative z-10">
         <CardHeader className="text-center space-y-3 sm:space-y-4 pb-6">
           <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto rounded-xl bg-gradient-to-br from-[#b8925c] to-[#d1aa73] flex items-center justify-center">
             <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 border-[#0a0b0e]" />

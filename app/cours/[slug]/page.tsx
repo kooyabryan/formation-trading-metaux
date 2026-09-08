@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -46,23 +47,45 @@ export default async function CourseDetailPage({
   const totalDuration = course.lessons.reduce((acc, lesson) => acc + (lesson.duration || 0), 0);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="max-w-5xl mx-auto">
-        <div className="mb-8">
-          <Link
-            href="/cours"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1 mb-4"
-          >
-            ← Retour aux formations
-          </Link>
-          <Badge variant="secondary" className="mb-4">
-            {course.category}
-          </Badge>
-          <h1 className="text-4xl md:text-5xl font-[var(--font-playfair)] mb-4">
-            {course.title}
-          </h1>
-          <p className="text-xl text-muted-foreground">{course.description}</p>
+    <div>
+      {/* Course Header with Image */}
+      {course.imageUrl && (
+        <div className="relative h-[300px] sm:h-[400px] w-full overflow-hidden">
+          <Image 
+            src={course.imageUrl} 
+            alt={course.title}
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0b0e] via-[#0a0b0e]/70 to-[#0a0b0e]/40" />
+          <div className="absolute inset-0 flex items-end">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12">
+              <div className="max-w-5xl mx-auto">
+                <Badge variant="secondary" className="mb-4 bg-[#16171d]/80 backdrop-blur-sm border-[#b8925c]/30 text-[#d1aa73]">
+                  {course.category}
+                </Badge>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-[var(--font-playfair)] mb-4 text-[#f3f4f6]">
+                  {course.title}
+                </h1>
+                <p className="text-lg sm:text-xl text-[#d1d5db] max-w-3xl">{course.description}</p>
+              </div>
+            </div>
+          </div>
         </div>
+      )}
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-8">
+            <Link
+              href="/cours"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1 mb-4"
+            >
+              ← Retour aux formations
+            </Link>
+          </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <Card className="card-premium">
@@ -152,13 +175,14 @@ export default async function CourseDetailPage({
           </CardContent>
         </Card>
 
-        <div className="mt-8 flex justify-center">
-          <Link href={`/apprendre/${course.slug}/${course.lessons[0]?.slug}`}>
-            <Button size="lg" className="btn-brass">
-              Commencer le cours
-              <Play className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
+          <div className="mt-8 flex justify-center">
+            <Link href={`/apprendre/${course.slug}/${course.lessons[0]?.slug}`}>
+              <Button size="lg" className="btn-brass">
+                Commencer le cours
+                <Play className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
