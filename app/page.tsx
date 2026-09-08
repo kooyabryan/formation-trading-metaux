@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -35,7 +36,15 @@ export default async function HomePage() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative py-16 sm:py-24 md:py-32 lg:py-40 overflow-hidden min-h-[calc(100vh-4rem)] flex items-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#13141a] via-[#0d0e12] to-[#0a0b0e]" />
+        <Image 
+          src="/images/hero-desk.png" 
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0b0e]/95 via-[#0d0e12]/90 to-[#0a0b0e]/95" />
         <div className="absolute inset-0 opacity-20 md:opacity-30" aria-hidden="true">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-[#b8925c] rounded-full blur-[96px] md:blur-[128px] opacity-20 animate-pulse-slow" />
           <div className="absolute bottom-1/4 right-1/4 w-64 h-64 md:w-96 md:h-96 bg-[#d1aa73] rounded-full blur-[96px] md:blur-[128px] opacity-15 animate-pulse-slow" style={{ animationDelay: "1s" }} />
@@ -75,6 +84,29 @@ export default async function HomePage() {
                 </Button>
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Visual Band Section */}
+      <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden">
+        <Image 
+          src="/images/chart-abstract.png" 
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0b0e]/98 via-[#0d0e12]/95 to-[#0a0b0e]/98" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-[var(--font-playfair)] text-[#f3f4f6]">
+              Une approche méthodique du{" "}
+              <span className="brass-gradient">trading professionnel</span>
+            </h2>
+            <p className="text-base sm:text-lg text-[#d1d5db] leading-relaxed px-4 sm:px-0">
+              Des stratégies éprouvées, validées par des années d'expérience sur les marchés mondiaux de métaux.
+            </p>
           </div>
         </div>
       </section>
@@ -141,7 +173,19 @@ export default async function HomePage() {
                 href={`/cours/${course.slug}`}
                 className="block group"
               >
-                <Card className="card-premium group-hover:brass-glow h-full transition-all duration-300 group-active:scale-[0.98]">
+                <Card className="card-premium group-hover:brass-glow h-full transition-all duration-300 group-active:scale-[0.98] overflow-hidden">
+                  {course.imageUrl && (
+                    <div className="relative h-48 w-full overflow-hidden">
+                      <Image 
+                        src={course.imageUrl} 
+                        alt={course.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0b0e]/90 via-[#0a0b0e]/40 to-transparent" />
+                    </div>
+                  )}
                   <CardHeader className="space-y-4 pb-4">
                     <div className="flex items-start justify-between gap-3">
                       <Badge 
@@ -176,8 +220,16 @@ export default async function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 md:py-24 bg-[#0d0e12]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden">
+        <Image 
+          src="/images/training-room.png" 
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-[#0a0b0e]/92" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-3xl mx-auto text-center space-y-6 sm:space-y-8">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-[var(--font-playfair)] text-[#f3f4f6] px-4 sm:px-0">
               Prêt à développer votre expertise ?
