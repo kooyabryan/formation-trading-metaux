@@ -193,4 +193,64 @@
   .bg-success {
     background-color: var(--color-success);
   }
+
+  /* Mobile-first utilities */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .safe-area-inset {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Smooth transitions with reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Brass glow effect for interactive elements */
+  .brass-glow {
+    box-shadow: 0 0 0 1px rgba(184, 146, 92, 0.1),
+                0 2px 8px rgba(184, 146, 92, 0.15);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .brass-glow:hover,
+  .brass-glow:focus-within {
+    box-shadow: 0 0 0 1px rgba(184, 146, 92, 0.2),
+                0 4px 16px rgba(184, 146, 92, 0.25);
+  }
+
+  .brass-glow:active {
+    box-shadow: 0 0 0 1px rgba(184, 146, 92, 0.15),
+                0 1px 4px rgba(184, 146, 92, 0.2);
+  }
+
+  /* Subtle animations */
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.2;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.3;
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
 }

@@ -32,28 +32,28 @@ export default async function DocumentsPage() {
   const userDocs = await getUserDocuments(userId);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-8">
-          <div className="inline-flex items-center gap-2 mb-4 text-primary">
-            <FileText className="h-6 w-6" />
-            <span className="text-sm font-medium uppercase tracking-wider">
+        <div className="mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-2 mb-3 sm:mb-4 text-primary">
+            <FileText className="h-5 w-5 sm:h-6 sm:w-6" />
+            <span className="text-xs sm:text-sm font-medium uppercase tracking-wider">
               Espace documents
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-[var(--font-playfair)] mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-[var(--font-playfair)] mb-3 sm:mb-4">
             Gestion documentaire
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base sm:text-lg text-muted-foreground">
             Déposez vos processus, procédures et documents de conformité dans
             votre espace sécurisé.
           </p>
         </div>
 
-        <Card className="card-premium mb-8">
-          <CardHeader>
-            <CardTitle className="text-[#f3f4f6]">Téléverser un document</CardTitle>
-            <CardDescription className="text-[#d1d5db]">
+        <Card className="card-premium brass-glow mb-6 sm:mb-8">
+          <CardHeader className="pb-4 sm:pb-6">
+            <CardTitle className="text-lg sm:text-xl text-[#f3f4f6]">Téléverser un document</CardTitle>
+            <CardDescription className="text-sm sm:text-base text-[#d1d5db]">
               Formats acceptés : PDF, DOCX, XLSX, PNG, JPG (max 10 Mo)
             </CardDescription>
           </CardHeader>
@@ -62,10 +62,10 @@ export default async function DocumentsPage() {
           </CardContent>
         </Card>
 
-        <Card className="card-premium">
-          <CardHeader>
-            <CardTitle>Mes documents</CardTitle>
-            <CardDescription>
+        <Card className="card-premium brass-glow">
+          <CardHeader className="pb-4 sm:pb-6">
+            <CardTitle className="text-lg sm:text-xl">Mes documents</CardTitle>
+            <CardDescription className="text-sm sm:text-base">
               {userDocs.length > 0
                 ? `${userDocs.length} document${userDocs.length > 1 ? "s" : ""} archivé${userDocs.length > 1 ? "s" : ""}`
                 : "Aucun document pour le moment"}
